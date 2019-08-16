@@ -39,3 +39,18 @@ async function setValues(i: {msg: FlexValue<string>, val: FlexValue<number>}): I
     };
 }
 ```
+
+And we can handle all types of errors in a generic way:
+
+```ts
+async function setValues(i: {msg: FlexValue<string>, val: FlexValue<number>}): IResult {
+    const onError = e => {
+        // any callback throwing or promise rejecting ends up here
+        console.log(e);
+    };
+    return {
+        msg: await Flex.get<string>(i.msg, {onError}),
+        val: await Flex.get<number>(i.val, {onError})
+    };
+}
+```
