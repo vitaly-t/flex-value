@@ -11,6 +11,7 @@
     "interface-name": [
       true,
       "always-prefix"
-    ]
+    ],
+    "unnecessary-else": false
   }
 }

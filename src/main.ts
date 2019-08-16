@@ -1,25 +1,22 @@
-import {FlexFunc, FlexOptions, FlexValue} from "./types";
+import {FlexFunc, IFlexOptions} from './types';
 
-export async function flexValue<T>(value: FlexValue<T>, options?: FlexOptions<T>): Promise<T> {
-    if (typeof value === 'function') {
-        const onError = options && typeof options.onError === 'function' ? options.onError : null;
-        const cc = options && options.cc;
-        if (onError) {
-            try {
-                const p = <Promise<T>>(<FlexFunc<T>>value).call(cc);
-                if (p && typeof p.catch === 'function') {
-                    return await p.catch<T>(err => {
-                        return <T>onError(err);
-                    });
-                }
-                return p;
-            } catch (e) {
-                return <T>onError(e);
-            }
-        } else {
-            return (<FlexFunc<T>>value).call(cc);
-        }
-    } else {
+// TODO: Consider adding Promise-value as well
+export async function flexValue<T>(value: T | FlexFunc<T>, options?: IFlexOptions<T>): Promise<T> {
+    if (typeof value !== 'function') {
         return value;
+    }
+    const onError = options && typeof options.onError === 'function' ? options.onError : null;
+    const cc = options && options.cc;
+    if (!onError) {
+        return (<FlexFunc<T>>value).call(cc);
+    }
+    try {
+        const p = <Promise<T>>(<FlexFunc<T>>value).call(cc);
+        if (p && typeof p.catch === 'function') {
+            return await p.catch<T>(err => <T>onError(err));
+        }
+        return p;
+    } catch (e) {
+        return <T>onError(e);
     }
 }
