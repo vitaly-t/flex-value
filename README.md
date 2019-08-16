@@ -27,12 +27,12 @@ interface IResult {
     val: number;
 }
 
-// By using type FlexValue, we allow each value to be any of:
+// By using type FlexValue, we extend value to support:
 // - direct value
 // - value as promise
 // - callback that returns the value
 // - callback that returns a promise
-function async setValues(i: {msg: FlexValue<string>, val: FlexValue<number>}): IResult {
+async function setValues(i: {msg: FlexValue<string>, val: FlexValue<number>}): IResult {
     return {
         msg: await Flex.get<string>(i.msg),
         val: await Flex.get<number>(i.val)
