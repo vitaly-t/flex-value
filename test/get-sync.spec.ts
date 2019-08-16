@@ -51,6 +51,37 @@ describe('getSync', () => {
         });
     });
     describe('for value-returning callbacks', () => {
+        it('must return simple value as is', () => {
+            const a = Flex.getSync(() => 123);
+            expect(a).to.eql(123);
+        });
+        it('must propagate errors without onError', () => {
+            expect(() => {
+                Flex.getSync(() => {
+                    throw 'ops';
+                });
+            }).to.throw('ops');
+        });
+        it('must redirect into onError', () => {
+            let err;
+            const val = Flex.getSync(() => {
+                throw 'ops';
+            }, {
+                onError: (e) => {
+                    err = e;
+                    return 123;
+                }
+            });
+            expect(err).to.eq('ops');
+            expect(val).to.eq(123);
+        });
+    });
+    describe('for promise-returning callbacks', () => {
+        it('must throw without onError', () => {
 
+        });
+        it('must call onError', () => {
+
+        });
     });
 });
