@@ -7,7 +7,7 @@ export interface IFlexOptions<T> {
      * Optional error handler, which can also a value
      * to be used in case of an error.
      */
-    onError?: (err: any) => T | undefined;
+    onError?: (err: any) => T | void;
 
     /**
      * Calling Context in case of a function.
