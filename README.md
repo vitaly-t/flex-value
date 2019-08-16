@@ -10,7 +10,7 @@ Strongly-typed value-resolution handler:
 * From a callback that returns the value
 * From a callback that returns a promise
 
-With support of a generic error handler.
+With support for a generic error handler.
 
 ## Install
 
