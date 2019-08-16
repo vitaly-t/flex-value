@@ -1,6 +1,6 @@
 {
   "name": "flex-value",
-  "version": "0.0.1",
+  "version": "0.0.1-Beta.0",
   "description": "Flexible value",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
