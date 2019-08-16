@@ -1,14 +1,14 @@
 import {FlexFunc, FlexValue, IFlexOptions} from './types';
 
-export async function getValue<T>(value: FlexValue<T>, options?: IFlexOptions<T>): Promise<T> {
+export function getValue<T>(value: FlexValue<T>, options?: IFlexOptions<T>): T | Promise<T> {
     const onError = options && typeof options.onError === 'function' ? options.onError : null;
     const cc = options && options.cc;
-    const v = <Promise<T>>value;
-    if (v && typeof v.catch === 'function') {
+    const p = <Promise<T>>value;
+    if (p && typeof p.catch === 'function') {
         if (onError) {
-            return await v.catch<T>(err => <T>onError(err));
+            return p.catch<T>(err => <T>onError(err));
         }
-        return v;
+        return p;
     }
     if (typeof value !== 'function') {
         return value;
@@ -17,11 +17,11 @@ export async function getValue<T>(value: FlexValue<T>, options?: IFlexOptions<T>
         return (<FlexFunc<T>>value).call(cc);
     }
     try {
-        const p = <Promise<T>>(<FlexFunc<T>>value).call(cc);
-        if (p && typeof p.catch === 'function') {
-            return await p.catch<T>(err => <T>onError(err));
+        const v = <Promise<T>>(<FlexFunc<T>>value).call(cc);
+        if (v && typeof v.catch === 'function') {
+            return v.catch<T>(err => <T>onError(err));
         }
-        return p;
+        return v;
     } catch (e) {
         return <T>onError(e);
     }
