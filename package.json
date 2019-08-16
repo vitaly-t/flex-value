@@ -40,7 +40,7 @@
     "@types/chai": "4.2.0",
     "@types/chai-spies": "1.0.1",
     "@types/mocha": "5.2.7",
-    "@types/node": "12.7.1",
+    "@types/node": "12.7.2",
     "browserify": "16.5.0",
     "chai": "4.2.0",
     "chai-spies": "1.0.0",

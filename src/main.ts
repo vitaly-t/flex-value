@@ -1,12 +1,18 @@
-import {FlexFunc, IFlexOptions} from './types';
+import {FlexFunc, FlexValue, IFlexOptions} from './types';
 
-// TODO: Consider adding Promise-value as well
-export async function flexValue<T>(value: T | FlexFunc<T>, options?: IFlexOptions<T>): Promise<T> {
+export async function getValue<T>(value: FlexValue<T>, options?: IFlexOptions<T>): Promise<T> {
+    const onError = options && typeof options.onError === 'function' ? options.onError : null;
+    const cc = options && options.cc;
+    const v = <Promise<T>>value;
+    if (v && typeof v.catch === 'function') {
+        if (onError) {
+            return await v.catch<T>(err => <T>onError(err));
+        }
+        return v;
+    }
     if (typeof value !== 'function') {
         return value;
     }
-    const onError = options && typeof options.onError === 'function' ? options.onError : null;
-    const cc = options && options.cc;
     if (!onError) {
         return (<FlexFunc<T>>value).call(cc);
     }

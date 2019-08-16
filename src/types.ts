@@ -1,5 +1,7 @@
 export type FlexFunc<T> = () => T | Promise<T>;
 
+export type FlexValue<T> = T | Promise<T> | FlexFunc<T>;
+
 export interface IFlexOptions<T> {
     /**
      * Optional error handler, which can also a value
