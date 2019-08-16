@@ -54,3 +54,7 @@ async function setValues(i: {msg: FlexValue<string>, val: FlexValue<number>}): I
     };
 }
 ```
+
+See more in the [Examples].
+
+[Examples]:https://github.com/vitaly-t/flex-value/wiki/Examples
