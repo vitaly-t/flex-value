@@ -43,7 +43,7 @@ export class Flex {
         const cc = options && options.cc;
         const checkAsync = (v: any): T => {
             if (v && typeof v.then === 'function') {
-                const err = new Error(`Value ${name ? 'for "' + name + '" ' : ''}cannot be asynchronous.`);
+                const err = new Error(`Value ${name ? '"' + name + '" ' : ''}cannot be asynchronous.`);
                 if (onError) {
                     return <T>onError(err, name);
                 }

@@ -11,13 +11,43 @@ describe('getSync', () => {
         });
     });
     describe('for promise values, without onError', () => {
-        it('must throw', () => {
-
+        it('must throw without name', () => {
+            expect(() => {
+                Flex.getSync(Promise.resolve(123));
+            }).to.throw('Value cannot be asynchronous.');
         });
+        it('must throw with name', () => {
+            expect(() => {
+                Flex.getSync(Promise.resolve(123), {name: 'hello'});
+            }).to.throw('Value "hello" cannot be asynchronous.');
+        });
+
     });
     describe('for promise values, with onError', () => {
-        it('must pass error into the handler', () => {
-
+        it('must pass error without name', () => {
+            let err: any, name;
+            Flex.getSync(Promise.resolve(123), {
+                onError: (e, n) => {
+                    err = e;
+                    name = n;
+                }
+            });
+            expect(err instanceof Error).to.be.true;
+            expect(err.message).to.eq('Value cannot be asynchronous.');
+            expect(name).to.be.undefined;
+        });
+        it('must pass error with name', () => {
+            let err: any, name;
+            Flex.getSync(Promise.resolve(123), {
+                onError: (e, n) => {
+                    err = e;
+                    name = n;
+                },
+                name: 'hello'
+            });
+            expect(err instanceof Error).to.be.true;
+            expect(err.message).to.eq('Value "hello" cannot be asynchronous.');
+            expect(name).to.eq('hello');
         });
     });
     describe('for value-returning callbacks', () => {
