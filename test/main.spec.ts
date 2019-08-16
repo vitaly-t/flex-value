@@ -1,11 +1,11 @@
 import {expect} from './header';
 import {Flex} from '../src';
 
-describe('getValue', () => {
+describe('getSync', () => {
     describe('for simple values', () => {
         it('must be returned directly', () => {
-            const a = Flex.get(123);
-            const b = Flex.get<string>('hello');
+            const a = Flex.getSync(123);
+            const b = Flex.getSync<string>('hello');
             expect(a).to.eq(123);
             expect(b).to.eq('hello');
         });
@@ -15,7 +15,7 @@ describe('getValue', () => {
     });
 });
 
-describe('async getValue', () => {
+describe('get', () => {
     describe('for simple values', () => {
         it('must be returned directly', async () => {
             const a = await Flex.get(123);
