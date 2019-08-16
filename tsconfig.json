@@ -1,10 +1,19 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist",
+    "esModuleInterop": true,
     "module": "commonjs",
-    "target": "es2015",
-    "sourceMap": true,
-    "strict": true
+    "strict": true,
+    "noUnusedLocals": true,
+    "outDir": "./dist",
+    "target": "es2015"
   },
+  "include": [
+    "examples/*.ts",
+    "src/*.ts",
+    "test/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,24 +1,55 @@
 {
-  "name": "dyno",
+  "name": "flex-value",
   "version": "0.0.1",
-  "description": "Dynamic value",
-  "main": "index.js",
-  "homepage": "https://github.com/vitaly-t/dyno",
+  "description": "Flexible value",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "homepage": "https://github.com/vitaly-t/flex-value",
+  "scripts": {
+    "all": "tsc && npm test && npm run lint && npm run build",
+    "build": "tsc && browserify dist/src/index.js -s flexVal -o dist/index.js",
+    "lint": "./node_modules/.bin/tslint --fix ./src/**/*.ts ./test/**/*.ts",
+    "test": "nyc mocha -r ts-node/register test/**/*.spec.ts",
+    "travis": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+  },
+  "files": [
+    "dist/src",
+    "dist/index.js"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/vitaly-t/dyno.git"
-  },
-  "bugs": {
-    "url": "https://github.com/vitaly-t/dyno/issues",
-    "email": "vitaly.tomilov@gmail.com"
+    "url": "git+https://github.com/vitaly-t/flex-value.git"
   },
   "author": {
     "name": "Vitaly Tomilov",
     "email": "vitaly.tomilov@gmail.com"
   },
-  "license": "MIT",
+  "license": "ISC",
   "engines": {
-    "node": ">=4.0",
-    "npm": ">=2.14.2"
+    "node": ">=4.5",
+    "npm": ">=2.15"
+  },
+  "bugs": {
+    "url": "https://github.com/vitaly-t/flex-value/issues"
+  },
+  "keywords": [
+    "flexible",
+    "value"
+  ],
+  "devDependencies": {
+    "@types/chai": "4.2.0",
+    "@types/chai-spies": "1.0.1",
+    "@types/mocha": "5.2.7",
+    "@types/node": "12.7.1",
+    "browserify": "16.5.0",
+    "chai": "4.2.0",
+    "chai-spies": "1.0.0",
+    "coveralls": "3.0.6",
+    "mocha": "6.2.0",
+    "mocha-lcov-reporter": "1.3.0",
+    "nyc": "14.1.1",
+    "ts-node": "8.3.0",
+    "tslint": "5.18.0",
+    "typescript": "3.5.3"
   }
 }
