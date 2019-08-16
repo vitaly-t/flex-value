@@ -1,4 +1,4 @@
-import {FlexFunc, FlexValue, IFlexOptions} from './types';
+import {FlexFunc, FlexValue, FlexValueSync, IFlexOptions} from './types';
 
 export class Flex {
 
@@ -28,4 +28,21 @@ export class Flex {
             return <T>onError(e);
         }
     }
+
+    static getSync<T>(value: FlexValueSync<T>, options?: IFlexOptions<T>): T {
+        const onError = options && typeof options.onError === 'function' ? options.onError : null;
+        const cc = options && options.cc;
+        if (typeof value !== 'function') {
+            return value;
+        }
+        if (onError) {
+            try {
+                return (<() => T>value).call(cc);
+            } catch (e) {
+                return <T>onError(e);
+            }
+        }
+        return (<() => T>value).call(cc);
+    }
+
 }

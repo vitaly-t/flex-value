@@ -1,5 +1,5 @@
 import {expect} from './header';
-import {Flex} from '../src/main';
+import {Flex} from '../src';
 
 describe('getValue', () => {
     describe('for simple values', () => {
