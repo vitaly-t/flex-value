@@ -2,15 +2,21 @@ import {expect} from './header';
 import {getValue} from '../src/main';
 
 describe('getValue', () => {
-    describe('for sync values', () => {
-        it('must be returned directly', async () => {
+    describe('for simple values', () => {
+        it('must be returned directly', () => {
             const a = getValue(123);
             const b = getValue<string>('hello');
             expect(a).to.eq(123);
             expect(b).to.eq('hello');
         });
     });
-    describe('for async values', () => {
+    describe('for value-returning callbacks', () => {
+
+    });
+});
+
+describe('async getValue', () => {
+    describe('for simple values', () => {
         it('must be returned directly', async () => {
             const a = await getValue(123);
             const b = await getValue<string>('hello');
@@ -44,5 +50,11 @@ describe('getValue', () => {
             expect(err).to.eq(123);
             expect(v).to.be.undefined;
         });
+    });
+    describe('for value-returning callbacks', () => {
+
+    });
+    describe('for promise-returning callbacks', () => {
+
     });
 });
