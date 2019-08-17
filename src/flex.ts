@@ -3,7 +3,9 @@ import {FlexFunc, FlexValue, FlexValueSync, IFlexOptions} from './types';
 export class Flex {
 
     /**
-     * Handles both synchronous and asynchronous values.
+     * Handles:
+     * - synchronous values and callbacks;
+     * - asynchronous values and callbacks.
      */
     static async get<T>(value: FlexValue<T>, options?: IFlexOptions<T>): Promise<T> {
         const onError = options && typeof options.onError === 'function' ? options.onError : null;
@@ -36,7 +38,8 @@ export class Flex {
     }
 
     /**
-     * Handles synchronous values, and throws on asynchronous ones.
+     * Handles synchronous values and callbacks.
+     * Reports error on everything asynchronous.
      */
     static getSync<T>(value: FlexValueSync<T>, options?: IFlexOptions<T>): T {
         const onError = options && typeof options.onError === 'function' ? options.onError : null;
