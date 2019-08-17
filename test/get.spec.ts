@@ -3,11 +3,11 @@ import {Flex} from '../src';
 
 describe('get', () => {
     describe('for simple values', () => {
-        it('must be returned directly', async () => {
-            const a = await Flex.get(123);
-            const b = await Flex.get<string>('hello');
-            expect(a).to.eq(123);
-            expect(b).to.eq('hello');
+        it('must be returned as a promise', async () => {
+            const a = await Flex.get(1);
+            const b = Flex.get(2);
+            expect(a).to.eq(1);
+            expect(typeof b.then).to.eq('function');
         });
     });
     describe('for promises', () => {
@@ -38,12 +38,31 @@ describe('get', () => {
         });
     });
     describe('for value-returning callbacks', () => {
-        it('must return the value directly', async () => {
+        it('must return the value', async () => {
             const a: string = await Flex.get(() => 'tst');
             expect(a).to.eq('tst');
         });
-        it('must redirect errors', () => {
-
+        it('must reject on errors', async () => {
+            let err: any;
+            await Flex.get(() => {
+                throw 'ops!';
+            }).catch(e => {
+                err = e;
+            });
+            expect(err).to.eq('ops!');
+        });
+        it('must redirect errors', async () => {
+            let err1: any, err2: any;
+            const onError = (e: any) => {
+                err1 = e;
+            };
+            await Flex.get(() => {
+                throw 'ops!';
+            }, {onError}).catch(e => {
+                err2 = e;
+            });
+            expect(err1).to.eq('ops!');
+            expect(err2).to.be.undefined;
         });
     });
     describe('for promise-returning callbacks', () => {
