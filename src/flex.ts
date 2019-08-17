@@ -5,7 +5,7 @@ export class Flex {
     /**
      * Handles both synchronous and asynchronous values.
      */
-    static get<T>(value: FlexValue<T>, options?: IFlexOptions<T>): T | Promise<T> {
+    static async get<T>(value: FlexValue<T>, options?: IFlexOptions<T>): Promise<T> {
         const onError = options && typeof options.onError === 'function' ? options.onError : null;
         const name = options && typeof options.name === 'string' ? options.name : undefined;
         const cc = options && options.cc;
@@ -26,7 +26,8 @@ export class Flex {
         try {
             const v = <Promise<T>>(<FlexFunc<T>>value).call(cc);
             if (v && typeof v.catch === 'function') {
-                return v.catch<T>(err => <T>onError(err, name));
+                // tslint is buggy here: https://github.com/palantir/tslint/issues/4824
+                return v.catch(err => <T>onError(err, name));
             }
             return v;
         } catch (e) {

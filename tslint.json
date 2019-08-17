@@ -12,6 +12,7 @@
       true,
       "always-prefix"
     ],
-    "unnecessary-else": false
+    "unnecessary-else": false,
+    "no-return-await": true
   }
 }
