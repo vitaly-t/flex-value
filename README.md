@@ -12,6 +12,8 @@ Strongly-typed, value-resolution handler:
 
 With support for generic error handling.
 
+---
+
 See [Wiki] for documentation.
 
 ## Install
@@ -25,7 +27,7 @@ npm i flex-value
 ```ts
 import {Flex, FlexValue} from 'flex-value';
 
-// fully-dynamic input:
+// fully-dynamic input/value:
 const input: FlexValue<string>; // string | Promise<string> | (() => string | Promise<string>) 
 
 // strongly-typed, actual value resolution:
@@ -42,7 +44,4 @@ const onError = e => {
 const value: string = await Flex.get(input, {onError});
 ```
 
-See more in the [Examples].
-
 [Wiki]:https://github.com/vitaly-t/flex-value/wiki
-[Examples]:https://github.com/vitaly-t/flex-value/wiki/Examples
