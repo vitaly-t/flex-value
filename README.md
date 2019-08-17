@@ -27,16 +27,16 @@ interface IResult {
     val: number;
 }
 
+// FlexValue<T> allows value to be any of the following:
+// - direct value = T
+// - value as a promise<T>
+// - callback that returns T
+// - callback that returns promise<T>
 interface ISomeInput {
     msg: FlexValue<string>;
     val: FlexValue<number>;
 }
 
-// FlexValue allows value to be any of the following:
-// - direct value
-// - value as a promise
-// - callback that returns the value
-// - callback that returns a promise
 async function setValues(i: ISomeInput): Promise<IResult> {
     return {
         msg: await Flex.get(i.msg),
