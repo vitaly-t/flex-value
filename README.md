@@ -32,10 +32,10 @@ interface IResult {
 // - value as a promise
 // - callback that returns the value
 // - callback that returns a promise
-async function setValues(i: {msg: FlexValue<string>, val: FlexValue<number>}): IResult {
+async function setValues(i: {msg: FlexValue<string>, val: FlexValue<number>}): Promise<IResult> {
     return {
-        msg: await Flex.get<string>(i.msg),
-        val: await Flex.get<number>(i.val)
+        msg: await Flex.get(i.msg),
+        val: await Flex.get(i.val)
     };
 }
 ```
@@ -43,14 +43,14 @@ async function setValues(i: {msg: FlexValue<string>, val: FlexValue<number>}): I
 And we can handle all types of errors in a generic way:
 
 ```ts
-async function setValues(i: {msg: FlexValue<string>, val: FlexValue<number>}): IResult {
+async function setValues(i: {msg: FlexValue<string>, val: FlexValue<number>}): Promise<IResult> {
     const onError = e => {
         // any callback throwing or promise rejecting ends up here
         console.log(e);
     };
     return {
-        msg: await Flex.get<string>(i.msg, {onError}),
-        val: await Flex.get<number>(i.val, {onError})
+        msg: await Flex.get(i.msg, {onError}),
+        val: await Flex.get(i.val, {onError})
     };
 }
 ```
