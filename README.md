@@ -14,7 +14,7 @@ With support for generic error handling.
 
 ---
 
-See [Wiki] for documentation.
+See [Wiki] for documentation and examples.
 
 ## Install
 

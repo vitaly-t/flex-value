@@ -70,5 +70,4 @@ export class Flex {
         }
         return checkAsync(v);
     }
-
 }
