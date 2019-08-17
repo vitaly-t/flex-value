@@ -17,6 +17,7 @@ With support for a generic error handler.
 ```sh
 npm i flex-value
 ```
+
 ## Usage
 
 ```ts

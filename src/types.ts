@@ -1,6 +1,6 @@
-export type FlexFunc<T> = () => T | Promise<T>;
-export type FlexValue<T> = T | Promise<T> | FlexFunc<T>;
-export type FlexValueSync<T> = T | (() => T);
+export type FlexFunc<T = unknown> = () => T | Promise<T>;
+export type FlexValue<T = unknown> = T | Promise<T> | FlexFunc<T>;
+export type FlexValueSync<T = unknown> = T | (() => T);
 
 export interface IFlexOptions<T> {
     /**
