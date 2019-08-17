@@ -75,6 +75,13 @@ describe('getSync', () => {
             expect(err).to.eq('ops');
             expect(val).to.eq(123);
         });
+        it('must pass in the context', () => {
+            let context: any;
+            Flex.getSync(function (this: any) {
+                context = this;
+            }, {cc: 123});
+            expect(context).to.eq(123);
+        });
     });
     describe('for promise-returning callbacks', () => {
         const errNoname = 'Value cannot be asynchronous.';

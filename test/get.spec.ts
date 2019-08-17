@@ -71,6 +71,14 @@ describe('get', () => {
             expect(err1).to.eq('ops!');
             expect(err2).to.be.undefined;
         });
+        it('must pass in the context', () => {
+            let context;
+            Flex.get(function () {
+                // @ts-ignore
+                context = this;
+            }, {cc: 123});
+            expect(context).to.eq(123);
+        });
     });
     describe('for promise-returning callbacks', () => {
         it('must return the value', async () => {
