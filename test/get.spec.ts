@@ -90,14 +90,16 @@ describe('get', () => {
             let err1: any, err2: any;
             const onError = (e: any) => {
                 err1 = e;
+                return 123;
             };
-            await Flex.get(() => {
+            const res = await Flex.get(() => {
                 return Promise.reject('ops!');
             }, {onError}).catch(e => {
                 err2 = e;
             });
             expect(err1).to.eq('ops!');
             expect(err2).to.be.undefined;
+            expect(res).to.eq(123);
         });
     });
 });
