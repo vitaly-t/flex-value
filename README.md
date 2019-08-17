@@ -27,12 +27,17 @@ interface IResult {
     val: number;
 }
 
+interface ISomeInput {
+    msg: FlexValue<string>;
+    val: FlexValue<number>;
+}
+
 // FlexValue allows value to be any of the following:
 // - direct value
 // - value as a promise
 // - callback that returns the value
 // - callback that returns a promise
-async function setValues(i: {msg: FlexValue<string>, val: FlexValue<number>}): Promise<IResult> {
+async function setValues(i: ISomeInput): Promise<IResult> {
     return {
         msg: await Flex.get(i.msg),
         val: await Flex.get(i.val)
@@ -43,7 +48,7 @@ async function setValues(i: {msg: FlexValue<string>, val: FlexValue<number>}): P
 And we can handle all types of errors in a generic way:
 
 ```ts
-async function setValues(i: {msg: FlexValue<string>, val: FlexValue<number>}): Promise<IResult> {
+async function setValues(i: ISomeInput): Promise<IResult> {
     const onError = e => {
         // any callback throwing or promise rejecting ends up here
         console.log(e);
