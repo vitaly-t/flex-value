@@ -29,9 +29,9 @@ interface IResult {
 
 // FlexValue<T> allows value to be any of the following:
 // - direct value = T
-// - value as a promise<T>
+// - value as a Promise<T>
 // - callback that returns T
-// - callback that returns promise<T>
+// - callback that returns Promise<T>
 interface ISomeInput {
     msg: FlexValue<string>;
     val: FlexValue<number>;
