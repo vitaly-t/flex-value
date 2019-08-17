@@ -1,7 +1,7 @@
 {
   "name": "flex-value",
-  "version": "0.0.6",
-  "description": "Flexible value",
+  "version": "0.0.7",
+  "description": "Strongly-typed, value-resolution handler.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "homepage": "https://github.com/vitaly-t/flex-value",
@@ -34,6 +34,10 @@
   },
   "keywords": [
     "flexible",
+    "strongly-typed",
+    "resolver",
+    "handler",
+    "dynamic",
     "value"
   ],
   "devDependencies": {

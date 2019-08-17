@@ -3,14 +3,14 @@
 [![Build Status](https://travis-ci.org/vitaly-t/flex-value.svg?branch=master)](https://travis-ci.org/vitaly-t/flex-value)
 [![Coverage Status](https://coveralls.io/repos/vitaly-t/flex-value/badge.svg?branch=master)](https://coveralls.io/r/vitaly-t/flex-value?branch=master)
 
-Strongly-typed value-resolution handler:
+Strongly-typed, value-resolution handler:
 
 * From a direct value
 * From value as a promise
 * From a callback that returns the value
 * From a callback that returns a promise
 
-With support for a generic error handler.
+With support for generic error handling.
 
 ## Install
 
