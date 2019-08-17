@@ -77,11 +77,24 @@ describe('getSync', () => {
         });
     });
     describe('for promise-returning callbacks', () => {
+        const errNoname = 'Value cannot be asynchronous.';
+        const errNamed = 'Value "hello" cannot be asynchronous.';
         it('must throw without onError', () => {
-
+            expect(() => {
+                Flex.getSync(() => Promise.resolve(123));
+            }).to.throw(errNoname);
+            expect(() => {
+                Flex.getSync(() => Promise.resolve(123), {name: 'hello'});
+            }).to.throw(errNamed);
         });
         it('must call onError', () => {
-
+            let err: any;
+            const onError = (e: any) => {
+                err = e;
+            };
+            Flex.getSync(() => Promise.resolve(123), {onError});
+            expect(err instanceof Error).to.be.true;
+            expect(err.message).to.eq(errNoname);
         });
     });
 });

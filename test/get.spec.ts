@@ -38,7 +38,13 @@ describe('get', () => {
         });
     });
     describe('for value-returning callbacks', () => {
+        it('must return the value directly', async () => {
+            const a: string = await Flex.get(() => 'tst');
+            expect(a).to.eq('tst');
+        });
+        it('must redirect errors', () => {
 
+        });
     });
     describe('for promise-returning callbacks', () => {
 
