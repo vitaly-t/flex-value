@@ -73,8 +73,7 @@ describe('get', () => {
         });
         it('must pass in the context', () => {
             let context;
-            Flex.get(function () {
-                // @ts-ignore
+            Flex.get(function (this: any) {
                 context = this;
             }, {cc: 123});
             expect(context).to.eq(123);
