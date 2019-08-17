@@ -12,6 +12,8 @@ Strongly-typed, value-resolution handler:
 
 With support for generic error handling.
 
+See [Wiki] for documentation.
+
 ## Install
 
 ```sh
@@ -23,44 +25,24 @@ npm i flex-value
 ```ts
 import {Flex, FlexValue} from 'flex-value';
 
-interface IResult {
-    msg: string;
-    val: number;
-}
+// fully-dynamic input:
+const input: FlexValue<string>; // string | Promise<string> | (() => string | Promise<string>) 
 
-// FlexValue<T> allows value to be any of the following:
-// - direct value = T
-// - value as a Promise<T>
-// - callback that returns T
-// - callback that returns Promise<T>
-interface ISomeInput {
-    msg: FlexValue<string>;
-    val: FlexValue<number>;
-}
-
-async function setValues(i: ISomeInput): Promise<IResult> {
-    return {
-        msg: await Flex.get(i.msg),
-        val: await Flex.get(i.val)
-    };
-}
+// strongly-typed, actual value resolution:
+const value: string = await Flex.get(input); 
 ```
 
 And we can handle all types of errors in a generic way:
 
 ```ts
-async function setValues(i: ISomeInput): Promise<IResult> {
-    const onError = e => {
-        // any callback throwing or promise rejecting ends up here
-        console.log(e);
-    };
-    return {
-        msg: await Flex.get(i.msg, {onError}),
-        val: await Flex.get(i.val, {onError})
-    };
-}
+const onError = e => {
+    // any error thrown or promise reject ends up here;
+};
+
+const value: string = await Flex.get(input, {onError});
 ```
 
 See more in the [Examples].
 
+[Wiki]:https://github.com/vitaly-t/flex-value/wiki
 [Examples]:https://github.com/vitaly-t/flex-value/wiki/Examples
