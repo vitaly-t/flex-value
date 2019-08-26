@@ -28,8 +28,7 @@ export class Flex {
         try {
             const v = <Promise<T>>(<FlexFunc<T>>value).call(cc);
             if (v && typeof v.catch === 'function') {
-                // tslint is buggy here: https://github.com/palantir/tslint/issues/4824
-                return v.catch(err => <T>onError(err, name));
+                return await v.catch(err => <T>onError(err, name));
             }
             return v;
         } catch (e) {
