@@ -10,7 +10,6 @@
     "target": "es2015"
   },
   "include": [
-    "examples/*.ts",
     "src/*.ts",
     "test/*.ts"
   ],
